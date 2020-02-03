@@ -5,10 +5,8 @@ use yii\web\AssetBundle;
 
 class CKEditorVueAsset extends AssetBundle
 {
-    public $sourcePath = '@npm/ckeditor--ckeditor5-vue';
-
     public $js = [
-        'dist/ckeditor.js'
+        'https://cdn.jsdelivr.net/npm/@ckeditor/ckeditor5-vue@1.0.1/dist/ckeditor.js'
     ];
 
     public $depends = [
