@@ -1,0 +1,38 @@
+{
+    "name": "polgarz/evolun-event",
+    "description": "Event extension for Evolun",
+    "keywords": ["evolun", "event", "volunteering system", "volunteering", "volunteer"],
+    "type": "evolun-extension",
+    "license": "BSD-3-Clause",
+    "support": {
+        "issues": "https://github.com/polgarz/evolun-event/issues",
+        "source": "https://github.com/polgarz/evolun-event"
+    },
+    "authors": [
+        {
+            "name": "Polgar Zoltan",
+            "email": "pzoltan@pzoltan.hu",
+            "homepage": "https://www.evolun.hu/"
+        }
+    ],
+    "require": {
+        "kartik-v/yii2-widget-datepicker": "@dev",
+        "kartik-v/yii2-widget-datetimepicker": "@dev",
+        "kartik-v/yii2-widget-select2": "@dev",
+        "bower-asset/bootstrap-multiselect": "~0.9",
+        "npm-asset/ckeditor--ckeditor5-build-classic": "~16.0.0",
+        "npm-asset/ckeditor--ckeditor5-vue": "~1.0",
+        "yiisoft/yii2-bootstrap": "~2.0.0"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "evolun\\event\\": ""
+        }
+    }
+}
