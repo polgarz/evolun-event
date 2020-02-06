@@ -5,9 +5,9 @@ use yii\web\AssetBundle;
 
 class EventAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/polgarz/evolun-event/assets';
+    public $sourcePath = '@vendor/polgarz/evolun-event/assets/dist';
 
-    public $js = ['dist/js/event.js'];
+    public $js = ['js/event.js'];
 
     public $depends = [
         'evolun\event\assets\BootstrapMultiselectAsset',

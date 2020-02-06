@@ -7,7 +7,15 @@ use yii\data\ActiveDataProvider;
 
 class RelatedEventsWidget extends \yii\base\Widget implements EventWidgetInterface
 {
+    /**
+     * @var Event
+     */
     public $event;
+
+    /**
+     * @var string
+     */
+    public $eventModuleId = 'event';
 
     /**
      * {@inheritdoc}
@@ -27,6 +35,7 @@ class RelatedEventsWidget extends \yii\base\Widget implements EventWidgetInterfa
 
         return $this->render('related-event-list', [
             'dataProvider' => $dataProvider,
+            'eventModuleId' => $this->eventModuleId,
         ]);
     }
 

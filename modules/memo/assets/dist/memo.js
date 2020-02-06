@@ -10,7 +10,7 @@ var memo = new Vue({
             enabled: false,
             timeout: null,
             // valtoztathatod
-            autosaveInterval: 2, // seconds
+            autosaveInterval: 10, // seconds
         },
         history: null,
         editor: ClassicEditor,
@@ -59,10 +59,10 @@ var memo = new Vue({
                 if (response.body.success == 1) {
                     this.loadHistory();
                 } else {
-                    this.errors.push("Sikertelen mentés");
+                    this.errors.push("Save unsuccesful");
                 }
             }, response => {
-                this.errors.push("Sikertelen mentés");
+                this.errors.push("Save unsuccesful");
             });
         },
         restore: function(content) {
@@ -75,7 +75,7 @@ var memo = new Vue({
                     this.history = response.body;
                 }
             }, (response) => {
-                this.errors.push("Hiba a korábbi mentések betöltése közben");
+                this.errors.push("Something went wrong when tried to load history");
             });
         },
         loadData: function() {
@@ -85,7 +85,7 @@ var memo = new Vue({
                     this.editorContent = response.body[0].content;
                 }
             }, (response) => {
-                this.errors.push("Hiba a beszámoló betöltése közben");
+                this.errors.push("Something went wrong when tried to load the memo");
             });
         }
     }

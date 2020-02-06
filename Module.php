@@ -2,7 +2,8 @@
 
 namespace evolun\event;
 
-use yii;
+use Yii;
+use yii\helpers\ArrayHelper;
 
 class Module extends \yii\base\Module
 {
@@ -22,13 +23,7 @@ class Module extends \yii\base\Module
      *          name: a szerep neve, limit: hányan jelentkezhetnek (0: végtelen))
      * @var array
      */
-    private $defaultCategories = [
-        'study' => ['title' => 'Foglalkozás', 'icon' => 'study.svg', 'color' => '#4B85C2'],
-        'meeting' => ['title' => 'Megbeszélés', 'icon' => 'meeting.svg', 'color' => '#F2A033'],
-        'party' => ['title' => 'Találkozó', 'icon' => 'party.svg', 'color' => '#BAE324'],
-        'camp' => ['title' => 'Tábor', 'icon' => 'camp.svg', 'color' => '#E94150'],
-        'hike' => ['title' => 'Túra', 'icon' => 'hike.svg', 'color' => '#6EE2C7']
-    ];
+    private $defaultCategories;
 
     /**
      * A saját esemény kategóriák (@see defaultCategories)
@@ -51,10 +46,34 @@ class Module extends \yii\base\Module
     {
         parent::init();
 
-        $this->categories = array_merge($this->defaultCategories, $this->categories);
+        if (!Yii::$app->user->identity instanceof \evolun\user\models\User) {
+            throw new \yii\base\InvalidConfigException('You have to install \'evolun-user\' to use this module');
+        }
 
-        if (!class_exists(Yii::$app->user->identityClass)) {
-            throw new \yii\base\InvalidConfigException('Nem található a felhasználó modul, ami elengedhetetlen az esemény modulhoz');
+        $this->registerTranslations();
+
+        $this->defaultCategories = [
+            'study' => ['title' => Yii::t('event', 'Study'), 'icon' => 'study.svg', 'color' => '#4B85C2'],
+            'meeting' => ['title' => Yii::t('event', 'Meeting'), 'icon' => 'meeting.svg', 'color' => '#F2A033'],
+            'party' => ['title' => Yii::t('event', 'Party'), 'icon' => 'party.svg', 'color' => '#BAE324'],
+            'camp' => ['title' => Yii::t('event', 'Camp'), 'icon' => 'camp.svg', 'color' => '#E94150'],
+            'hike' => ['title' => Yii::t('event', 'Hike'), 'icon' => 'hike.svg', 'color' => '#6EE2C7'],
+        ];
+
+        $this->categories = ArrayHelper::merge($this->defaultCategories, $this->categories);
+    }
+
+    public function registerTranslations()
+    {
+        if (!isset(Yii::$app->get('i18n')->translations['event'])) {
+            Yii::$app->get('i18n')->translations['event*'] = [
+                'class' => \yii\i18n\PhpMessageSource::className(),
+                'basePath' => __DIR__ . '/messages',
+                'sourceLanguage' => 'en-US',
+                'fileMap' => [
+                    'event' => 'event.php',
+                ]
+            ];
         }
     }
 }

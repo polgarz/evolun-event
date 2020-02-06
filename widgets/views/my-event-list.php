@@ -5,12 +5,14 @@ use yii\helpers\Html;
 use evolun\event\assets\EventAsset;
 
 $bundle = EventAsset::register($this);
+
+Yii::$app->getModule($eventModuleId);
 ?>
 <?php if ($dataProvider->models): ?>
     <div class="col-sm-6">
         <div class="box box-danger">
             <div class="box-header with-border">
-                <h3 class="box-title">Eseményeid</h3>
+                <h3 class="box-title"><?= Yii::t('event/widget', 'Your events') ?></h3>
             </div>
             <div class="box-body">
                 <?= ListView::widget([
@@ -29,7 +31,7 @@ $bundle = EventAsset::register($this);
                                     <div class="media-body">
                                         <strong>{title}</strong>
                                         <div class="text-muted">
-                                            {participates} résztvevő &bullet; <span title="{start}">{relative}</span> &bullet; {place}
+                                            {participates} &bullet; <span title="{start}">{relative}</span> &bullet; {place}
                                         </div>
                                     </div>
                                 </div>
@@ -44,15 +46,15 @@ $bundle = EventAsset::register($this);
                             '{url}' => Url::to(['/event/default/view', 'id' => $model->id]),
                             '{color}' => $model->categoryDetails['color'] ?? '#ccc',
                             '{category}' => $model->categoryDetails['title'] ?? null,
-                            '{icon}' => isset($model->categoryDetails['icon']) ? Html::img($bundle->baseUrl . '/dist/svg/categories/' . $model->categoryDetails['icon'], ['width' => '35']) : null,
-                            '{participates}' => count($model->participates),
+                            '{icon}' => isset($model->categoryDetails['icon']) ? Html::img($bundle->baseUrl . '/svg/categories/' . $model->categoryDetails['icon'], ['width' => '35']) : null,
+                            '{participates}' => Yii::t('event/widget', '{participates} going', ['participates' => count($model->participates)]),
                         ]);
                     },
                     'summary' => '',
                 ]) ?>
             </div>
             <div class="box-footer">
-                <a href="<?= Url::to(['/event/default/index']) ?>">További események</a>
+                <a href="<?= Url::to(['/event/default/index']) ?>"><?= Yii::t('event/widget', 'More events') ?></a>
             </div>
         </div>
     </div>

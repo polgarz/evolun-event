@@ -12,7 +12,7 @@ var comments = new Vue({
     },
     methods: {
         deleteComment: function(id) {
-            if (confirm("Biztosan törlöd ezt a megjegyzést?")) {
+            if (confirm("Are you sure?")) {
                 var formData = new FormData();
                 formData.append("comment_id", id);
                 formData.append(yii.getCsrfParam(), yii.getCsrfToken());
@@ -21,10 +21,10 @@ var comments = new Vue({
                     if (response.body.success == 1) {
                         this.loadData();
                     } else {
-                        this.errors.push("Sikertelen törlés");
+                        this.errors.push("Delete unsuccesful");
                     }
                 }, response => {
-                    this.errors.push("Sikertelen törlés");
+                    this.errors.push("Delete unsuccesful");
                 });
             }
         },
@@ -44,7 +44,7 @@ var comments = new Vue({
                     this.errors = response.body.error;
                 }
             }, response => {
-                this.errors.push("Sikertelen küldés");
+                this.errors.push("Send unsuccesful");
             });
         },
         loadData: function() {
@@ -54,7 +54,7 @@ var comments = new Vue({
                     this.comments = response.body;
                 }
             }, (response) => {
-                this.errors.push("Hiba a megjegyzések betöltése közben");
+                this.errors.push("Something went wrong when tried to load comments");
             });
         }
     }

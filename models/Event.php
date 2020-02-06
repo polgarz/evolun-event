@@ -59,19 +59,17 @@ class Event extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'title' => 'Cím',
-            'start' => 'Időpont (kezdés)',
-            'end' => 'Időpont (vége)',
-            'description' => 'Leírás',
-            'place' => 'Helyszín',
-            'category' => 'Kategória',
-            'organizer_user_id' => 'Szervező',
-            'memo' => 'Memo',
-            'created_at' => 'Létrehozva',
-            'updated_at' => 'Utoljára módosítva',
-            'created_by' => 'Létrehozta',
-            'updated_by' => 'Utoljára módosította',
+            'title' => Yii::t('event', 'Title'),
+            'start' => Yii::t('event', 'Start'),
+            'end' => Yii::t('event', 'End'),
+            'description' => Yii::t('event', 'Description'),
+            'place' => Yii::t('event', 'Place'),
+            'category' => Yii::t('event', 'Category'),
+            'organizer_user_id' => Yii::t('event', 'Organizer'),
+            'created_at' => Yii::t('event', 'Created at'),
+            'updated_at' => Yii::t('event', 'Updated at'),
+            'created_by' => Yii::t('event', 'Created by'),
+            'updated_by' => Yii::t('event', 'Updated by'),
         ];
     }
 

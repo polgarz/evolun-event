@@ -125,8 +125,8 @@ class DefaultController extends Controller
 
             $summary = [];
 
-            if ($relativeMemberSince = $user->getRelativeMemberSince(true)) {
-                $summary[] = $relativeMemberSince . ' tag';
+            if ($user->member_since) {
+                $summary[] = Yii::t('event/participates', 'member since {date}', ['date' => Yii::$app->formatter->asDate($user->member_since)]);
             }
 
             if ($authRole) {
@@ -134,7 +134,7 @@ class DefaultController extends Controller
             }
 
             if ($participate->user_id === $event->organizer_user_id) {
-                $summary[] = 'szervező';
+                $summary[] = Yii::t('event/participates', 'organizer');
             }
 
             $whole = count($participate->days) === count($event->days);

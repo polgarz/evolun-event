@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model evolun\user\models\User */
 
-$this->title = 'Esemény adatainak módosítása: ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Események', 'url' => ['index']];
+$this->title = Yii::t('event', 'Update event: {title}', ['title' => $model->title]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('event', 'Events'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Módosítás';
+$this->params['breadcrumbs'][] = Yii::t('event', 'Update');
 $this->params['pageHeader'] = ['title' => $this->title];
 ?>
 

@@ -19,4 +19,13 @@ class Module extends \evolun\event\modules\EventSubModule
      * @var string
      */
     public $eventModelClass = 'evolun\event\models\Event';
+
+    public function init()
+    {
+        parent::init();
+
+        if (!$this->title) {
+            $this->title = Yii::t('event', 'Participates');
+        }
+    }
 }

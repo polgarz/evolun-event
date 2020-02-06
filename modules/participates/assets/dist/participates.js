@@ -23,11 +23,11 @@ var participates = new Vue({
                     this.data = response.body;
                 }
             }, (response) => {
-                this.errors.push("Hiba a résztvevők betöltése közben");
+                this.errors.push("Something went wrong when tried to load participates");
             });
         },
         deleteParticipate: function(id) {
-            if (confirm("Biztosan törlöd ezt a résztvevőt?")) {
+            if (confirm("Are you sure?")) {
                 var formData = new FormData();
                 formData.append("user_id", id);
                 formData.append(yii.getCsrfParam(), yii.getCsrfToken());
@@ -37,10 +37,10 @@ var participates = new Vue({
                         this.loadData();
                         this.page = 1;
                     } else {
-                        this.errors.push("Sikertelen törlés");
+                        this.errors.push("Delete unsuccesful");
                     }
                 }, response => {
-                    this.errors.push("Sikertelen törlés");
+                    this.errors.push("Delete unsuccesful");
                 });
             }
         },

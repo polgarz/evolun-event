@@ -37,18 +37,6 @@ class EventParticipateDays extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'event_participate_id' => 'Event Participate ID',
-            'date' => 'Date',
-        ];
-    }
-
-    /**
      * @return \yii\db\ActiveQuery
      */
     public function getEventParticipate()

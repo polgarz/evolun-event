@@ -108,7 +108,7 @@ class DefaultController extends Controller
                 $content = $module->runAction($module->defaultRoute, Yii::$app->request->get());
 
                 $modules[] = [
-                    'title' => $module->title ?? 'Modul',
+                    'title' => $module->title ?? 'Module',
                     'content' => $content
                 ];
             }
@@ -134,7 +134,7 @@ class DefaultController extends Controller
 
         // ha veget ert az esemeny, nem csinalunk semmit
         if ($event->end < date('Y-m-d H:i:s')) {
-            Yii::$app->session->setFlash('danger', 'Nem tudsz jelentkezni az eseményre, mert már véget ért');
+            Yii::$app->session->setFlash('danger', Yii::t('event', 'You can\'t apply to this event, because it\'s over'));
             return $this->redirect(['view', 'id' => $event->id]);
         }
 
@@ -157,9 +157,9 @@ class DefaultController extends Controller
                     $day->save();
                 }
             }
-            Yii::$app->session->setFlash('success', 'Jelentkeztél az eseményre');
+            Yii::$app->session->setFlash('success', Yii::t('event', 'You successfully applied to this event'));
         } else {
-            Yii::$app->session->setFlash('danger', 'Nem sikerült jelentkezni az eseményre');
+            Yii::$app->session->setFlash('danger', Yii::t('event', 'Something went wrong with the application'));
         }
 
         return $this->redirect(['view', 'id' => $event->id]);
@@ -222,14 +222,14 @@ class DefaultController extends Controller
 
         // ha veget ert az esemeny, nem csinalunk semmit
         if ($event->end < date('Y-m-d H:i:s')) {
-            Yii::$app->session->setFlash('danger', 'Nem tudod visszamondani a jelentkezésed, mert az esemény már véget ért!');
+            Yii::$app->session->setFlash('danger', Yii::t('event', 'You can\'t cancel the application beacuse the event is over!'));
             return $this->redirect(['view', 'id' => $event->id]);
         }
 
         if ($model && $model->delete()) {
-            Yii::$app->session->setFlash('success', 'Sikeresen visszamondtad az eseményre jelentkezésed');
+            Yii::$app->session->setFlash('success', Yii::t('event', 'Successfully canceled the event'));
         } else {
-            Yii::$app->session->setFlash('danger', 'Nem sikerült visszamondani a jelentkezésed');
+            Yii::$app->session->setFlash('danger', Yii::t('event', 'Something went wrong when tried to cancel the application'));
         }
 
         return $this->redirect(['view', 'id' => $id]);
@@ -252,9 +252,9 @@ class DefaultController extends Controller
         }
 
         if ($model->save()) {
-            Yii::$app->session->setFlash('success', 'Sikeresen beállítottad a szervezőt');
+            Yii::$app->session->setFlash('success', Yii::t('event', 'Successfully applied as an organizer'));
         } else {
-            Yii::$app->session->setFlash('danger', 'Nem sikerült beállítani a szervezőt');
+            Yii::$app->session->setFlash('danger', Yii::t('event', 'Something went wrong with the application as an organizer'));
         }
 
         return $this->redirect(['view', 'id' => $id]);
@@ -271,10 +271,10 @@ class DefaultController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
-                Yii::$app->session->setFlash('success', 'Az esemény létrehozása sikeres volt');
+                Yii::$app->session->setFlash('success', Yii::t('event', 'Create succesful'));
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
-                Yii::$app->session->setFlash('danger', 'Sikertelen létrehozás');
+                Yii::$app->session->setFlash('danger', Yii::t('event', 'Create unsuccesful'));
             }
         }
 
@@ -297,10 +297,10 @@ class DefaultController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
-                Yii::$app->session->setFlash('success', 'Az esemény adatainak módosítása sikeres volt');
+                Yii::$app->session->setFlash('success', Yii::t('event', 'Update succesful'));
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
-                Yii::$app->session->setFlash('danger', 'Sikertelen mentés');
+                Yii::$app->session->setFlash('danger', Yii::t('event', 'Update unsuccesful'));
             }
         }
 
@@ -351,6 +351,6 @@ class DefaultController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException(Yii::t('yii', 'Page not found.'));
     }
 }

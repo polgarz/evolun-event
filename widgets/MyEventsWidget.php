@@ -8,6 +8,11 @@ use yii\data\ActiveDataProvider;
 class MyEventsWidget extends \yii\base\Widget
 {
     /**
+     * @var string
+     */
+    public $eventModuleId = 'event';
+
+    /**
      * {@inheritdoc}
      */
     public function run()
@@ -27,6 +32,7 @@ class MyEventsWidget extends \yii\base\Widget
 
         return $this->render('my-event-list', [
             'dataProvider' => $dataProvider,
+            'eventModuleId' => $this->eventModuleId,
         ]);
     }
 }

@@ -60,11 +60,7 @@ class EventComment extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'event_id' => 'Event ID',
-            'comment' => 'Megjegyzés',
-            'date' => 'Date',
+            'comment' => Yii::t('event/comments', 'Comment'),
         ];
     }
 
@@ -81,10 +77,10 @@ class EventComment extends \yii\db\ActiveRecord
                 // annak a usernek nem kuldunk, aki irta
                 if ($participate->user_id == Yii::$app->user->id) continue;
 
-                Yii::$app->mailer->compose('@vendor/polgarz/evolun-event/modules/comments/mail/new-comment', ['comment' => $this])
+                Yii::$app->mailer->compose(Yii::$app->controller->module->commentNotificationEmail, ['comment' => $this])
                     ->setFrom(Yii::$app->params['mainEmail'])
                     ->setTo($participate->user->email)
-                    ->setSubject('Valaki hozzászólt egy eseményhez, amin te is ott leszel')
+                    ->setSubject(Yii::t('event/comments', 'Someone commented on an event that you are going too'))
                     ->send();
             }
         }

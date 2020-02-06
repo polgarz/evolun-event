@@ -11,12 +11,12 @@ ParticipatesAsset::register($this);
 ?>
 <div id="participates">
     <div class="alert alert-danger alert-dissmissible" v-if="errors.length" v-cloak>
-        <h4><i class="icon fa fa-ban"></i> Hiba!</h4>
+        <h4><i class="icon fa fa-ban"></i> <?= Yii::t('event', 'Error') ?></h4>
         <div v-for="error in errors">{{error}}</div>
     </div>
 
     <div v-for="(item, role) in data.items" v-cloak v-if="data.items">
-        <h4 v-if="role.length > 0">{{role}} ({{item.length}} fő)</h4>
+        <h4 v-if="role.length > 0">{{role}} ({{item.length}} <?= Yii::t('event/participates', 'member') ?>)</h4>
         <table class="table table-hover">
             <tr v-for="participate in item">
                 <td>
@@ -57,8 +57,7 @@ ParticipatesAsset::register($this);
 
     </div>
 
-
-    <div class="text-muted" v-if="data.items && data.items.length == 0" v-cloak><p>Nincsenek résztvevők</p></div>
+    <div class="text-muted" v-if="data.items && data.items.length == 0" v-cloak><p><?= Yii::t('event/participates', 'There are no participates') ?></p></div>
 
 </div>
 

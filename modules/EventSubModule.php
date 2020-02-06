@@ -44,7 +44,7 @@ class EventSubModule extends \yii\base\Module
         if ($event = Event::findOne(Yii::$app->request->get('id'))) {
             $this->setEvent($event);
         } else {
-            throw new NotFoundHttpException('Nincs ilyen esemény!');
+            throw new NotFoundHttpException(Yii::t('yii', 'Page not found.'));
         }
 
         parent::init();

@@ -3,9 +3,7 @@ $(document).ready(function() {
     if ($('#participate_days').length) {
         $('#participate_days').multiselect({
             buttonWidth: '100%',
-            allSelectedText: 'Végig',
             numberDisplayed: 1,
-            nSelectedText: 'nap',
             selectAllNumber: false,
             onChange: function(option, checked) {
                 // legalabb 1-et ki kell valasztania
@@ -18,7 +16,7 @@ $(document).ready(function() {
                 $.post(setAttendOptionsUrl, {
                     days: $('#participate_days').val()
                 }).fail(function() {
-                    alert('Nem sikerült elmenti a napokat, próbáld újra!');
+                    alert('Saving the days failed, please try again!');
                 });
             }
         });
@@ -50,12 +48,12 @@ function setParticipateRole(role) {
     $.post(setAttendOptionsUrl, {
         role: role
     }).fail(function() {
-        alert('Nem sikerült elmenti a szerepet, próbáld újra!');
+        alert('Saving the role failed, please try again!');
     }).done(function(resp) {
         if (resp.success == 1) {
             $('#role_title').html(resp.selectedRole);
         } else {
-            alert('Nem sikerült elmenti a szerepet, próbáld újra!');
+            alert('Saving the role failed, please try again!');
         }
     });
 }

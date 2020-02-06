@@ -56,19 +56,6 @@ class EventParticipate extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'event_id' => 'Event ID',
-            'role' => 'Role',
-        ];
-    }
-
-    /**
      * @return \yii\db\ActiveQuery
      */
     public function getEvent()

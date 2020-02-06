@@ -14,8 +14,8 @@ CommentsAsset::register($this);
 <div id="comments">
     <div class="post" v-for="comment in comments" v-cloak v-if="comments && comments.length > 0">
         <div class="user-block">
-            <img class="img-circle img-bordered-sm" :src="comment.user.image" alt="Profilkép" v-if="comment.user">
-            <img src="https://via.placeholder.com/100x100?text=%3F" class="img-circle img-bordered-sm" alt="Profilkép" v-else>
+            <img class="img-circle img-bordered-sm" :src="comment.user.image" alt="<?= Yii::t('event/comments', 'Profile image') ?>" v-if="comment.user">
+            <img src="https://via.placeholder.com/100x100?text=%3F" class="img-circle img-bordered-sm" alt="<?= Yii::t('event/comments', 'Profile image') ?>" v-else>
             <span class="username">
                 <?php if (Yii::$app->user->can('showUsers')): ?>
                     <a :href="comment.user.url">{{comment.user.name}}</a>
@@ -33,14 +33,14 @@ CommentsAsset::register($this);
     </div>
 
     <div class="alert alert-danger alert-dissmissible" v-if="errors.length" v-cloak>
-        <h4><i class="icon fa fa-ban"></i> Hiba!</h4>
+        <h4><i class="icon fa fa-ban"></i> <?= Yii::t('event', 'Error') ?></h4>
         <div v-for="error in errors">{{error}}</div>
     </div>
 
-    <div class="text-muted" v-if="comments && comments.length == 0" v-cloak><p>Nincsenek megjegyzések</p></div>
+    <div class="text-muted" v-if="comments && comments.length == 0" v-cloak><p><?= Yii::t('event/comments', 'There are no comments') ?></p></div>
 
     <?php if (Yii::$app->user->can('showEvents')): ?>
-        <p><strong>Új megjegyzés</strong></p>
+        <p><strong><?= Yii::t('event/comments', 'New comment') ?></strong></p>
         <!-- uj dokumentum -->
         <div>
             <?= Html::beginForm(null, 'post', ['v-on:submit' => 'newComment($event)', 'v-on:submit.prevent' => true]) ?>
@@ -50,7 +50,7 @@ CommentsAsset::register($this);
                 <div class="help-block"></div>
             </div>
 
-            <?= Html::submitButton('Küldés', ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton(Yii::t('event/comments', 'Send'), ['class' => 'btn btn-success']) ?>
 
             <?= Html::endForm() ?>
         </div>

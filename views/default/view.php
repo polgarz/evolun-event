@@ -14,7 +14,7 @@ use evolun\event\assets\EventAsset;
 /* @var $model evolun\user\models\Event */
 
 $this->title = $model->title . ' (' . Yii::$app->formatter->asDate($model->start, 'medium') . ')';
-$this->params['breadcrumbs'][] = ['label' => 'Események', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('event', 'Events'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['pageHeader'] = ['title' => '&nbsp;'];
 
@@ -28,7 +28,7 @@ $this->registerJsVar('setAttendOptionsUrl', Url::to(['set-attend-options', 'id' 
         <div class="box box-default">
             <div class="box-body box-profile">
                 <div class="img-circle profile-user-img img-responsive text-center" title="{category}" style="background-color: <?= $model->categoryDetails['color'] ?>; width: 100px; height: 100px; justify-content: center; align-items: center; display: flex;">
-                    <?= ($model->categoryDetails['icon'] ? Html::img($bundle->baseUrl . '/dist/svg/categories/' . $model->categoryDetails['icon'], ['width' => '80']) : '') ?>
+                    <?= ($model->categoryDetails['icon'] ? Html::img($bundle->baseUrl . '/svg/categories/' . $model->categoryDetails['icon'], ['width' => '80']) : '') ?>
                 </div>
                 <h3 class="profile-username text-center"><?= $model->title ?></h3>
 
@@ -60,13 +60,13 @@ $this->registerJsVar('setAttendOptionsUrl', Url::to(['set-attend-options', 'id' 
                                 <?= (Yii::$app->user->can('showUsers') ? Html::a($model->organizer->name, ['/users/default/view', 'id' => $model->created_by]) : $model->organizer->name) ?>
                                 <?php if (Yii::$app->user->can('setOrganizer')): ?>
                                     <?php if ($model->organizer_user_id == Yii::$app->user->id): ?>
-                                        (<?= Html::a('mégse', ['set-organizer', 'id' => $model->id, 'cancel' => 1], ['data-method' => 'post']) ?>)
+                                        (<?= Html::a(Yii::t('event', 'cancel'), ['set-organizer', 'id' => $model->id, 'cancel' => 1], ['data-method' => 'post']) ?>)
                                     <?php endif ?>
                                 <?php endif ?>
                             <?php else: ?>
-                                Nincs
+                                <?= Yii::t('event', 'No one yet') ?>
                                 <?php if (Yii::$app->user->can('setOrganizer')): ?>
-                                    (<?= Html::a('jelentkezem', ['set-organizer', 'id' => $model->id], ['data-method' => 'post']) ?>)
+                                    (<?= Html::a(Yii::t('event', 'apply'), ['set-organizer', 'id' => $model->id], ['data-method' => 'post']) ?>)
                                 <?php endif ?>
                             <?php endif ?>
                         </div>
@@ -76,19 +76,19 @@ $this->registerJsVar('setAttendOptionsUrl', Url::to(['set-attend-options', 'id' 
                 <?php if (Yii::$app->user->can('manageEvents')): ?>
                     <div class="row">
                         <div class="col-xs-6">
-                            <p><?= Html::a('<i class="fa fa-pencil"></i> Módosítás', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-block']) ?></p>
+                            <p><?= Html::a('<i class="fa fa-pencil"></i> ' . Yii::t('event', 'Update'), ['/event/default/update', 'id' => $model->id], ['class' => 'btn btn-primary btn-block']) ?></p>
                         </div>
                         <div class="col-xs-6">
-                            <p><?= Html::a('<i class="fa fa-trash"></i> Törlés', ['delete', 'id' => $model->id], ['class' => 'btn btn-danger btn-block', 'data-confirm' => 'Biztosan törlöd ezt az eseményt? Minden hozzá tartozó adat törlődni fog!', 'data-method' => 'post']) ?></p>
+                            <p><?= Html::a('<i class="fa fa-trash"></i> ' . Yii::t('event', 'Delete'), ['/event/default/delete', 'id' => $model->id], ['class' => 'btn btn-danger btn-block', 'data-confirm' => Yii::t('event', 'Are you sure? Every data belongs this event will be deleted!')]) ?></p>
                         </div>
                     </div>
                 <?php endif ?>
 
                 <?php if ($model->end > date('Y-m-d H:i:s')): ?>
                     <?php if (!$attendance): ?>
-                        <p><?= Html::a('<i class="fa fa-calendar-check-o"></i> Ott leszek', ['attend', 'id' => $model->id], ['class' => 'btn btn-success btn-block', 'data-method' => 'post']) ?></p>
+                        <p><?= Html::a('<i class="fa fa-calendar-check-o"></i> ' . Yii::t('event', 'I will be there'), ['attend', 'id' => $model->id], ['class' => 'btn btn-success btn-block', 'data-method' => 'post']) ?></p>
                     <?php else: ?>
-                        <p><?= Html::a('<i class="fa fa-calendar-minus-o"></i> Mégse megyek', ['cancel-attend', 'id' => $model->id], ['class' => 'btn btn-warning btn-block', 'data-method' => 'post']) ?></p>
+                        <p><?= Html::a('<i class="fa fa-calendar-minus-o"></i> ' . Yii::t('event', 'Cancel'), ['cancel-attend', 'id' => $model->id], ['class' => 'btn btn-warning btn-block', 'data-method' => 'post']) ?></p>
 
                         <p>
                             <div class="row">
@@ -121,7 +121,7 @@ $this->registerJsVar('setAttendOptionsUrl', Url::to(['set-attend-options', 'id' 
                                                     function($d) { return $d->format('Y-m-d'); },
                                                     function($d) { return Yii::$app->formatter->asDate($d, 'MMMM dd. (EE)'); }
                                                 ),
-                                                ['multiple' => true, 'id' => 'participate_days']
+                                                ['multiple' => true, 'id' => 'participate_days', 'data-n-selected-text' => Yii::t('event', 'days'), 'data-all-selected-text' => Yii::t('event', 'Whole event')]
                                             ) ?>
                                         </div>
                                     </div>
