@@ -2,7 +2,7 @@
     "name": "polgarz/evolun-event",
     "description": "Event extension for Evolun",
     "keywords": ["evolun", "event", "volunteering system", "volunteering", "volunteer"],
-    "type": "evolun-extension",
+    "type": "yii2-extension",
     "license": "BSD-3-Clause",
     "support": {
         "issues": "https://github.com/polgarz/evolun-event/issues",
