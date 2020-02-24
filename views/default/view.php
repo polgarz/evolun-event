@@ -84,7 +84,8 @@ $this->registerJsVar('setAttendOptionsUrl', Url::to(['set-attend-options', 'id' 
                     </div>
                 <?php endif ?>
 
-                <?php if ($model->end > date('Y-m-d H:i:s')): ?>
+                <?php if (($model->end && $model->end > date('Y-m-d H:i:s'))
+                    || (!$model->end && $model->start > date('Y-m-d H:i:s'))): ?>
                     <?php if (!$attendance): ?>
                         <p><?= Html::a('<i class="fa fa-calendar-check-o"></i> ' . Yii::t('event', 'I will be there'), ['attend', 'id' => $model->id], ['class' => 'btn btn-success btn-block', 'data-method' => 'post']) ?></p>
                     <?php else: ?>

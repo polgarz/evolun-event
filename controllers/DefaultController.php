@@ -133,7 +133,7 @@ class DefaultController extends Controller
         $model = new EventParticipate(['event_id' => $event->id, 'user_id' => Yii::$app->user->id]);
 
         // ha veget ert az esemeny, nem csinalunk semmit
-        if ($event->end < date('Y-m-d H:i:s')) {
+        if (($event->end && $event->end < date('Y-m-d H:i:s')) || (!$event->end && $event->start < date('Y-m-d H:i:s'))) {
             Yii::$app->session->setFlash('danger', Yii::t('event', 'You can\'t apply to this event, because it\'s over'));
             return $this->redirect(['view', 'id' => $event->id]);
         }
