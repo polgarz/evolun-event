@@ -46,7 +46,7 @@ class Module extends \yii\base\Module
     {
         parent::init();
 
-        if (!Yii::$app->user->identity instanceof \evolun\user\models\User) {
+        if (Yii::$app->user->identity && !Yii::$app->user->identity instanceof \evolun\user\models\User) {
             throw new \yii\base\InvalidConfigException('You have to install \'evolun-user\' to use this module');
         }
 

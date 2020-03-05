@@ -20,19 +20,19 @@ class m191130_234943_rbac_init extends Migration
         $auth->add($rule);
 
         $manageEvents = $auth->createPermission('manageEvents');
-        $manageEvents->description = 'Hozzáadhat, módosíthat, és törölhet eseményeket';
+        $manageEvents->description = 'Can add, edit, or delete events';
         $auth->add($manageEvents);
 
         $showEvents = $auth->createPermission('showEvents');
-        $showEvents->description = 'Megtekintheti az eseményeket';
+        $showEvents->description = 'Can view events';
         $auth->add($showEvents);
 
         $setOrganizer = $auth->createPermission('setOrganizer');
-        $setOrganizer->description = 'Beállíthatja magát eseményhez, mint szervező';
+        $setOrganizer->description = 'Can set him/herself as an organizer';
         $auth->add($setOrganizer);
 
         $manageOrganizedEvents = $auth->createPermission('manageOrganizedEvents');
-        $manageOrganizedEvents->description = 'Szerkesztheti azoknak az eseménynek a részleteit, amit ő szervez';
+        $manageOrganizedEvents->description = 'Can edit the details of the event he/she is organizing';
         $manageOrganizedEvents->ruleName = $rule->name;
         $auth->add($manageOrganizedEvents);
 

@@ -130,7 +130,7 @@ class DefaultController extends Controller
             }
 
             if ($authRole) {
-                $summary[] = $authRole->description;
+                $summary[] = $authRole->name;
             }
 
             if ($participate->user_id === $event->organizer_user_id) {
