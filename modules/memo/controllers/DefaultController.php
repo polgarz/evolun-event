@@ -49,7 +49,7 @@ class DefaultController extends Controller
                         'actions' => ['save', 'history'],
                         'allow'   => true,
                         'roles'   => ['manageEvents'],
-                        'roleParams' => function($rule) {
+                        'roleParams' => function ($rule) {
                             return ['event' => $this->getEvent()];
                         }
                     ],
@@ -109,7 +109,6 @@ class DefaultController extends Controller
         $model = new EventMemo(['event_id' => $id]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
             // ha tobb memo van, mint amennyit megadtunk, a regieket toroljuk
             $memos = EventMemo::find()
                 ->where(['event_id' => $id])
@@ -117,7 +116,7 @@ class DefaultController extends Controller
                 ->orderBy('created_at DESC')
                 ->all();
 
-            foreach($memos as $memo) {
+            foreach ($memos as $memo) {
                 $memo->delete();
             }
 

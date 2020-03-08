@@ -73,9 +73,11 @@ class EventComment extends \yii\db\ActiveRecord
 
         // emailt kuldunk a resztvevoknek, ha valaki uj kommentet ir egy esemenyhez
         if ($participates = $this->event->participates) {
-            foreach($participates as $participate) {
+            foreach ($participates as $participate) {
                 // annak a usernek nem kuldunk, aki irta
-                if ($participate->user_id == Yii::$app->user->id) continue;
+                if ($participate->user_id == Yii::$app->user->id) {
+                    continue;
+                }
 
                 Yii::$app->mailer->compose(Yii::$app->controller->module->commentNotificationEmail, ['comment' => $this])
                     ->setFrom(Yii::$app->params['mainEmail'])

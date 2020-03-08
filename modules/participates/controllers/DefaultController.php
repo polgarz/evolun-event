@@ -45,7 +45,7 @@ class DefaultController extends Controller
                         'actions' => ['delete'],
                         'allow'   => true,
                         'roles'   => ['manageEvents'],
-                        'roleParams' => function($rule) {
+                        'roleParams' => function ($rule) {
                             return ['event' => $this->getEvent()];
                         }
                     ],
@@ -112,8 +112,7 @@ class DefaultController extends Controller
             'users' => $this->getUserList(),
         ];
 
-        foreach($participates as $participate) {
-
+        foreach ($participates as $participate) {
             $user = $participate->user;
             $authRole = Yii::$app->authManager->getRole($user->role);
 

@@ -51,7 +51,7 @@ $bundle = EventAsset::register($this);
                 [
                     'attribute' => 'name',
                     'format' => 'raw',
-                    'value' => function($model) use (&$bundle) {
+                    'value' => function ($model) use (&$bundle) {
 
                         $layout = '
                             <a href="{url}" class="text-default">
@@ -88,7 +88,7 @@ $bundle = EventAsset::register($this);
                     'contentOptions' => ['style' => 'width: 65px; vertical-align: middle; text-align: right'],
                     'template' => '{gcalendar}',
                     'buttons' => [
-                        'gcalendar' => function($url, $model) {
+                        'gcalendar' => function ($url, $model) {
                             $url = strtr('https://www.google.com/calendar/render?action=TEMPLATE&text={title}&dates={start}/{end}&details={description}&location={place}&ctz=UTC', [
                                 '{title}' => urlencode($model->title),
                                 '{place}' => urlencode($model->place),

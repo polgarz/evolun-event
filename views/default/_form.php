@@ -19,7 +19,7 @@ $bundle = EventAsset::register($this);
         <div class="box-body">
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'category')->dropdownList(array_map(function($item) {
+            <?= $form->field($model, 'category')->dropdownList(array_map(function ($item) {
                 return $item['title'];
             }, Yii::$app->controller->module->categories)) ?>
 

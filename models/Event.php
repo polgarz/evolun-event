@@ -143,7 +143,7 @@ class Event extends \yii\db\ActiveRecord
         $interval = new \DateInterval('P1D');
         $period = new \DatePeriod($begin, $interval, $end);
 
-        foreach($period as $date) {
+        foreach ($period as $date) {
             $days[] = $date;
         }
 
@@ -168,7 +168,7 @@ class Event extends \yii\db\ActiveRecord
         if ($this->end) {
             if (date('Y', strtotime($this->end)) != date('Y', strtotime($this->start))) {
                 $dates[] = Yii::$app->formatter->asDateTime($this->end, 'yyyy. MMM dd. (EE) HH:mm');
-            } else if (date('Ymd', strtotime($this->start)) != date('Ymd', strtotime($this->end))) {
+            } elseif (date('Ymd', strtotime($this->start)) != date('Ymd', strtotime($this->end))) {
                 $dates[] = Yii::$app->formatter->asDateTime($this->end, 'MMM dd. (EE) HH:mm');
             } else {
                 $dates[] = Yii::$app->formatter->asDateTime($this->end, 'HH:mm');

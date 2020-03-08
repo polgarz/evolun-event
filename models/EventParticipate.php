@@ -36,7 +36,7 @@ class EventParticipate extends \yii\db\ActiveRecord
             [['user_id', 'event_id'], 'required'],
             [['user_id', 'event_id'], 'integer'],
             [['role'], 'string', 'max' => 50],
-            ['role', function($attribute, $params, $validator) {
+            ['role', function ($attribute, $params, $validator) {
                 $role = $this->$attribute;
                 $roles = ($this->event->categoryDetails['roles'] ?? []);
 

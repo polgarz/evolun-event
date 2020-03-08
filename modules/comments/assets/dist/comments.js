@@ -7,11 +7,11 @@ var comments = new Vue({
         },
         errors: [],
     },
-    created: function() {
+    created: function () {
         this.loadData();
     },
     methods: {
-        deleteComment: function(id) {
+        deleteComment: function (id) {
             if (confirm("Are you sure?")) {
                 var formData = new FormData();
                 formData.append("comment_id", id);
@@ -28,7 +28,7 @@ var comments = new Vue({
                 });
             }
         },
-        newComment: function(event) {
+        newComment: function (event) {
             this.errors = [];
 
             var formData = new FormData();
@@ -47,7 +47,7 @@ var comments = new Vue({
                 this.errors.push("Send unsuccesful");
             });
         },
-        loadData: function() {
+        loadData: function () {
             this.errors = [];
             this.$http.get(commentsListUrl).then((response) => {
                 if (!!response.body) {

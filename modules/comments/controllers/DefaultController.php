@@ -131,7 +131,7 @@ class DefaultController extends Controller
             ->all();
         $return = [];
 
-        foreach($comments as $comment) {
+        foreach ($comments as $comment) {
             $return[] = array_merge($comment->toArray(), [
                 'user' => [
                     'name' => $comment->user->name,

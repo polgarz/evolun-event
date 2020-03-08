@@ -19,7 +19,7 @@ Yii::$app->getModule($eventModuleId);
                     'dataProvider' => $dataProvider,
                     'options' => ['tag' => 'div', 'class' => 'list-group list-group-unbordered'],
                     'itemOptions' => ['tag' => false],
-                    'itemView' => function($model) use (&$bundle) {
+                    'itemView' => function ($model) use (&$bundle) {
                         $layout = '
                             <a href="{url}" class="list-group-item">
                                 <div class="media">

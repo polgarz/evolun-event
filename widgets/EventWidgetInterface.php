@@ -1,6 +1,7 @@
 <?php
 namespace evolun\event\widgets;
 
-interface EventWidgetInterface {
+interface EventWidgetInterface
+{
     public function getEvent();
 }

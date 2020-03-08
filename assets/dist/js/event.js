@@ -1,21 +1,21 @@
-$(document).ready(function() {
+$(document).ready(function () {
     // 'view' oldalon a nap allito
     if ($('#participate_days').length) {
         $('#participate_days').multiselect({
             buttonWidth: '100%',
             numberDisplayed: 1,
             selectAllNumber: false,
-            onChange: function(option, checked) {
+            onChange: function (option, checked) {
                 // legalabb 1-et ki kell valasztania
                 var selectedOptions = $('#participate_days option:selected');
                 if (selectedOptions.length < 1) {
                     $('#participate_days').multiselect('select', option.val());
                 }
             },
-            onDropdownHide: function(event) {
+            onDropdownHide: function (event) {
                 $.post(setAttendOptionsUrl, {
                     days: $('#participate_days').val()
-                }).fail(function() {
+                }).fail(function () {
                     alert('Saving the days failed, please try again!');
                 });
             }
@@ -44,12 +44,13 @@ $(document).ready(function() {
  * 'view' oldalon a szerep allito
  * @param {String} role a szerep id-ja
  */
-function setParticipateRole(role) {
+function setParticipateRole(role)
+{
     $.post(setAttendOptionsUrl, {
         role: role
-    }).fail(function() {
+    }).fail(function () {
         alert('Saving the role failed, please try again!');
-    }).done(function(resp) {
+    }).done(function (resp) {
         if (resp.success == 1) {
             $('#role_title').html(resp.selectedRole);
         } else {

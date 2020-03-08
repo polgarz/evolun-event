@@ -100,9 +100,11 @@ $this->registerJsVar('setAttendOptionsUrl', Url::to(['set-attend-options', 'id' 
                                                 <span class="ellipsis" id="role_title"><?= $model->categoryDetails['roles'][$attendance->role]['name'] ?? $attendance->role ?></span> <span class="caret"></span>
                                             </button>
                                             <ul class="dropdown-menu btn-block">
-                                                <?php foreach($model->categoryDetails['roles'] as $id => $role): ?>
+                                                <?php foreach ($model->categoryDetails['roles'] as $id => $role): ?>
                                                     <?php /* ha betelt, nem is mutatjuk */ ?>
-                                                    <?php if (count($model->participatesByRole[$id] ?? []) >= $role['limit'] && $role['limit'] > 0) continue ?>
+                                                    <?php if (count($model->participatesByRole[$id] ?? []) >= $role['limit'] && $role['limit'] > 0) {
+                                                        continue;
+                                                    } ?>
                                                     <li>
                                                         <?= Html::a($role['name'], 'javascript:;', ['onclick' => 'setParticipateRole("' . $id . '")']) ?>
                                                     </li>
@@ -119,8 +121,12 @@ $this->registerJsVar('setAttendOptionsUrl', Url::to(['set-attend-options', 'id' 
                                                 ArrayHelper::getColumn($attendance->days, 'date'),
                                                 ArrayHelper::map(
                                                     $model->days,
-                                                    function($d) { return $d->format('Y-m-d'); },
-                                                    function($d) { return Yii::$app->formatter->asDate($d, 'MMMM dd. (EE)'); }
+                                                    function ($d) {
+                                                        return $d->format('Y-m-d');
+                                                    },
+                                                    function ($d) {
+                                                        return Yii::$app->formatter->asDate($d, 'MMMM dd. (EE)');
+                                                    }
                                                 ),
                                                 ['multiple' => true, 'id' => 'participate_days', 'data-n-selected-text' => Yii::t('event', 'days'), 'data-all-selected-text' => Yii::t('event', 'Whole event')]
                                             ) ?>
@@ -137,7 +143,7 @@ $this->registerJsVar('setAttendOptionsUrl', Url::to(['set-attend-options', 'id' 
         <!-- /.box -->
 
         <?php if (!empty(Yii::$app->controller->module->widgets)): ?>
-            <?php foreach(Yii::$app->controller->module->widgets as $widget): ?>
+            <?php foreach (Yii::$app->controller->module->widgets as $widget): ?>
                 <?= $widget::widget(['event' => $model]) ?>
             <?php endforeach ?>
         <?php endif ?>
@@ -147,7 +153,7 @@ $this->registerJsVar('setAttendOptionsUrl', Url::to(['set-attend-options', 'id' 
     <!-- right col -->
     <div class="col-lg-9 col-md-8">
         <?php if ($modules): ?>
-            <?php foreach($modules as $id => $module): ?>
+            <?php foreach ($modules as $id => $module): ?>
                 <?php $items[] = ['label' => $module['title'], 'content' => $module['content']] ?>
             <?php endforeach ?>
 

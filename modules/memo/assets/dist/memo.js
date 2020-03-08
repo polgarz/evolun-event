@@ -28,29 +28,29 @@ var memo = new Vue({
             },
         }
     },
-    created: function() {
+    created: function () {
         this.loadHistory();
     },
     methods: {
-        autosave: function() {
+        autosave: function () {
             if (!this.autosaveConfig.enabled) {
                 return;
             }
 
             clearTimeout(this.autosaveConfig.timeout);
 
-            this.autosaveConfig.timeout = setTimeout(function() {
+            this.autosaveConfig.timeout = setTimeout(function () {
                 this.save();
             }.bind(this), this.autosaveConfig.autosaveInterval*1000);
         },
-        enableAutosave: function() {
+        enableAutosave: function () {
             this.autosaveConfig.enabled = true;
         },
-        disableAutosave: function() {
+        disableAutosave: function () {
             this.autosaveConfig.enabled = false;
             clearTimeout(this.autosaveConfig.timeout);
         },
-        save: function() {
+        save: function () {
             var formData = new FormData();
             formData.append("EventMemo[content]", this.editorContent);
             formData.append(yii.getCsrfParam(), yii.getCsrfToken());
@@ -65,10 +65,10 @@ var memo = new Vue({
                 this.errors.push("Save unsuccesful");
             });
         },
-        restore: function(content) {
+        restore: function (content) {
             this.editorContent = content;
         },
-        loadHistory: function() {
+        loadHistory: function () {
             this.errors = [];
             this.$http.get(memoHistoryUrl).then((response) => {
                 if (!!response.body) {
@@ -78,7 +78,7 @@ var memo = new Vue({
                 this.errors.push("Something went wrong when tried to load history");
             });
         },
-        loadData: function() {
+        loadData: function () {
             this.errors = [];
             this.$http.get(memoHistoryUrl).then((response) => {
                 if (response.body.length > 0) {

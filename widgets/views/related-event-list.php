@@ -15,12 +15,14 @@ Yii::$app->getModule($eventModuleId);
                 'dataProvider' => $dataProvider,
                 'options' => ['tag' => 'div', 'class' => 'list-group list-group-unbordered'],
                 'itemOptions' => ['tag' => false],
-                'itemView' => function($model) { return '
+                'itemView' => function ($model) {
+                    return '
                     <a href="' . Url::to(['/event/default/view', 'id' => $model->id]) . '" class="list-group-item" style="padding: 10px 5px;">
                         <h4 class="list-group-item-heading">' . $model->title . '</h4>
                         <p class="list-group-item-text">' . Yii::t('event/widget', '{participates} going', ['participates' => count($model->participates)]) . ' , ' . Yii::$app->formatter->asDate($model->start, (date('Y') != date('Y', strtotime($model->start)) ? 'yyyy. ' : '') . 'MMM dd. (EE) HH:mm') . '</p>
                     </a>
-                    '; },
+                    ';
+                },
                 'summary' => '',
             ]) ?>
         </div>

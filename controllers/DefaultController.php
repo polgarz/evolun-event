@@ -3,7 +3,9 @@
 namespace evolun\event\controllers;
 
 use Yii;
-use evolun\event\models\{Event, EventParticipate, EventParticipateDays};
+use evolun\event\models\Event;
+use evolun\event\models\EventParticipate;
+use evolun\event\models\EventParticipateDays;
 use evolun\event\modules\EventSubModule;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -93,7 +95,7 @@ class DefaultController extends Controller
         $attendance = $model->getParticipates()->where(['user_id' => Yii::$app->user->id])->one();
 
         if ($this->module->modules) {
-            foreach($this->module->modules as $id => $module) {
+            foreach ($this->module->modules as $id => $module) {
                 $module = $this->module->getModule($id);
 
                 if (!$module instanceof EventSubModule) {
@@ -141,7 +143,7 @@ class DefaultController extends Controller
         // ha tartoznak az esemeny kategoriahoz szerepek, akkor az elsot beallitjuk
         if (isset($event->categoryDetails['roles'])) {
             // ha az elso lehetseges opcio mar betelt, akkor lepunk a kovetkezore.. es igy tovabb
-            foreach($event->categoryDetails['roles'] as $id => $role) {
+            foreach ($event->categoryDetails['roles'] as $id => $role) {
                 if (!$role['limit'] || $role['limit'] > count($event->participatesByRole[$id] ?? [])) {
                     $model->role = $id;
                     break;
@@ -152,7 +154,7 @@ class DefaultController extends Controller
         if ($model->save()) {
             // ha több napos az esemény, akkor megelőlegezzük, hogy mindegyik napon ott lesz a felhasználó
             if (count($event->days) > 1) {
-                foreach($event->days as $day) {
+                foreach ($event->days as $day) {
                     $day = new EventParticipateDays(['event_participate_id' => $model->id, 'date' => $day->format('Y-m-d')]);
                     $day->save();
                 }
@@ -199,7 +201,7 @@ class DefaultController extends Controller
             // ha napot valt
             if (count($days) > 0) {
                 EventParticipateDays::deleteAll(['event_participate_id' => $model->id]);
-                foreach($days as $day) {
+                foreach ($days as $day) {
                     $eventParticipateDay = new EventParticipateDays(['event_participate_id' => $model->id, 'date' => $day]);
                     $eventParticipateDay->save();
                 }

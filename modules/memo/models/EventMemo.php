@@ -75,10 +75,10 @@ class EventMemo extends \yii\db\ActiveRecord
         return [
             'id',
             'content',
-            'created_at' => function($model) {
+            'created_at' => function ($model) {
                 return Yii::$app->formatter->asDateTime($model->created_at);
             },
-            'created_by' => function($model) {
+            'created_by' => function ($model) {
                 return $model->createdBy->name ?? '';
             }
         ];

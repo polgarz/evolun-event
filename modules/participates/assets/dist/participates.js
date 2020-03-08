@@ -12,11 +12,11 @@ var participates = new Vue({
         },
         errors: [],
     },
-    created: function() {
+    created: function () {
         this.loadData();
     },
     methods: {
-        loadData: function(page) {
+        loadData: function (page) {
             this.errors = [];
             this.$http.get(participatesListUrl).then((response) => {
                 if (!!response.body) {
@@ -26,7 +26,7 @@ var participates = new Vue({
                 this.errors.push("Something went wrong when tried to load participates");
             });
         },
-        deleteParticipate: function(id) {
+        deleteParticipate: function (id) {
             if (confirm("Are you sure?")) {
                 var formData = new FormData();
                 formData.append("user_id", id);

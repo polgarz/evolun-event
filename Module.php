@@ -23,7 +23,7 @@ class Module extends \yii\base\Module
      *          name: a szerep neve, limit: hányan jelentkezhetnek (0: végtelen))
      * @var array
      */
-    private $defaultCategories;
+    private $_defaultCategories;
 
     /**
      * A saját esemény kategóriák (@see defaultCategories)
@@ -52,7 +52,7 @@ class Module extends \yii\base\Module
 
         $this->registerTranslations();
 
-        $this->defaultCategories = [
+        $this->_defaultCategories = [
             'study' => ['title' => Yii::t('event', 'Study'), 'icon' => 'study.svg', 'color' => '#4B85C2'],
             'meeting' => ['title' => Yii::t('event', 'Meeting'), 'icon' => 'meeting.svg', 'color' => '#F2A033'],
             'party' => ['title' => Yii::t('event', 'Party'), 'icon' => 'party.svg', 'color' => '#BAE324'],
@@ -60,7 +60,7 @@ class Module extends \yii\base\Module
             'hike' => ['title' => Yii::t('event', 'Hike'), 'icon' => 'hike.svg', 'color' => '#6EE2C7'],
         ];
 
-        $this->categories = ArrayHelper::merge($this->defaultCategories, $this->categories);
+        $this->categories = ArrayHelper::merge($this->_defaultCategories, $this->categories);
     }
 
     public function registerTranslations()
