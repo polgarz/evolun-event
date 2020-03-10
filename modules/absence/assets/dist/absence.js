@@ -5,7 +5,7 @@ var absences = new Vue({
         kidList: null,
         form: {
             'kid': null,
-            'reason': null,
+            'reason': '',
         },
         errors: [],
     },
