@@ -17,7 +17,6 @@ use evolun\event\Module;
  * @property string|null $place
  * @property string $category
  * @property int|null $organizer_user_id
- * @property string|null $memo
  * @property string|null $created_at
  * @property string|null $updated_at
  * @property int|null $created_by
@@ -44,7 +43,7 @@ class Event extends \yii\db\ActiveRecord
         return [
             [['title', 'start', 'category', 'place'], 'required'],
             [['start', 'end', 'created_at', 'updated_at'], 'safe'],
-            [['description', 'memo'], 'string'],
+            [['description'], 'string'],
             [['category'], 'in', 'range' => array_keys(Yii::$app->controller->module->categories)],
             [['organizer_user_id', 'created_by', 'updated_by'], 'integer'],
             [['title', 'place', 'category'], 'string', 'max' => 255],
