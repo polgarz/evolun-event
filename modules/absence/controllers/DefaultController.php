@@ -41,7 +41,7 @@ class DefaultController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['delete', 'create', 'kids'],
+                        'actions' => ['delete', 'create'],
                         'allow'   => true,
                         'roles'   => ['manageEvents'],
                         'roleParams' => function ($rule) {
