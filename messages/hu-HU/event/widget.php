@@ -21,5 +21,8 @@ return [
     'Recent events' => 'Közelgő események',
     'Related events' => 'Kapcsolódó események',
     '{participates} going' => '{participates} résztvevő',
-    'Your events' => 'Eseményeid'
+    'Your events' => 'Eseményeid',
+    'Absences' => 'Hiányzások',
+    'There are no absences' => 'Nincsenek hiányzások',
+    '{absences} absences' => '{absences} hiányzás',
 ];

@@ -4,6 +4,7 @@ namespace evolun\event\modules\absence\models;
 
 use Yii;
 use evolun\event\models\Event;
+use evolun\kid\models\Kid;
 
 /**
  * This is the model class for table "absence".
@@ -37,7 +38,7 @@ class Absence extends \yii\db\ActiveRecord
             [['reason'], 'string', 'max' => 255],
             ['kid_id', 'unique', 'targetAttribute' => ['kid_id', 'event_id'], 'message' => Yii::t('event/absence', 'This kid was already set as absent before')],
             [['event_id'], 'exist', 'skipOnError' => true, 'targetClass' => Event::class, 'targetAttribute' => ['event_id' => 'id']],
-            [['kid_id'], 'exist', 'skipOnError' => true, 'targetClass' => Yii::$app->controller->module->kidModelClass, 'targetAttribute' => ['kid_id' => 'id']],
+            [['kid_id'], 'exist', 'skipOnError' => true, 'targetClass' => Kid::class, 'targetAttribute' => ['kid_id' => 'id']],
         ];
     }
 
@@ -68,6 +69,6 @@ class Absence extends \yii\db\ActiveRecord
      */
     public function getKid()
     {
-        return $this->hasOne(Yii::$app->controller->module->kidModelClass, ['id' => 'kid_id']);
+        return $this->hasOne(Kid::class, ['id' => 'kid_id']);
     }
 }
