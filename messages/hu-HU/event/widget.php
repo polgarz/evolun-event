@@ -25,4 +25,6 @@ return [
     'Absences' => 'Hiányzások',
     'There are no absences' => 'Nincsenek hiányzások',
     '{absences} absences' => '{absences} hiányzás',
+    'You don\'t have any event yet' => 'Még nincsenek eseményeid',
+    'There are no upcoming events' => 'Nincsenek közelgő események',
 ];
