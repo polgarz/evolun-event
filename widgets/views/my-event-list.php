@@ -8,7 +8,7 @@ $bundle = EventAsset::register($this);
 
 Yii::$app->getModule($eventModuleId);
 ?>
-<div class="box box-danger">
+<div class="box box-default">
     <div class="box-header with-border">
         <h3 class="box-title"><?= Yii::t('event/widget', 'Your events') ?></h3>
     </div>
