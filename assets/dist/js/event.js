@@ -1,4 +1,17 @@
 $(document).ready(function () {
+    // 'index' page load more events
+    $('#load_more_events').on('click', function() {
+        $('.event-list-table').find('.hidden:gt(-4)').removeClass('hidden').addClass('new-item');
+
+        if (!$('.event-list-table').find('.hidden:gt(-4)').length) {
+            $('#load_more_events').addClass('hidden');
+        }
+    });
+
+    if ($('.event-list-table').find('.hidden:gt(-4)').length) {
+        $('#load_more_events').removeClass('hidden');
+    }
+
     // 'view' oldalon a nap allito
     if ($('#participate_days').length) {
         $('#participate_days').multiselect({

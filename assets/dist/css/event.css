@@ -1,0 +1,14 @@
+.new-item {
+    background-color: auto;
+    animation: bganimation 1s linear;
+}
+
+.event-list-load-more, .event-list-load-more:hover {
+    border: 0 !important;
+    border-radius: 0 !important;
+}
+
+@keyframes bganimation {
+    from { opacity: 0.1; }
+    to { opacity: 1; }
+}

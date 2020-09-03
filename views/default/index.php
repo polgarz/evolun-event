@@ -28,13 +28,15 @@ $bundle = EventAsset::register($this);
     <?php endif ?>
 
     <div class="box-body table-responsive">
-
+        <a href="javascript:;" class="btn btn-primary btn-block btn-sm event-list-load-more" id="load_more_events">
+            <?= Yii::t('event', 'Load more events') ?>
+        </a>
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'showHeader' => false,
-            'tableOptions' => ['class' => 'table table-hover'],
-            'rowOptions' => function ($model, $key, $index, $grid) use (&$closestEvent) {
-                $options = [];
+            'tableOptions' => ['class' => 'table table-hover event-list-table'],
+            'rowOptions' => function ($model, $key, $index, $grid) use (&$closestEvent, &$dateThreshold) {
+                $options = ['data-date' => $model->start];
 
                 if ($closestEvent && $model->id === $closestEvent->id) {
                     $options += ['style' => 'border-bottom: 3px dotted #bbb;'];
@@ -42,6 +44,10 @@ $bundle = EventAsset::register($this);
 
                 if (in_array(Yii::$app->user->id, ArrayHelper::getColumn($model->participates, 'user_id'))) {
                     $options += ['class' => 'bg-warning'];
+                }
+
+                if (strtotime($model->start) > strtotime('+ ' . $dateThreshold . ' days')) {
+                    $options += ['class' => 'hidden'];
                 }
 
                 return $options;

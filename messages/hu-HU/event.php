@@ -68,4 +68,5 @@ return [
     'cancel' => 'mégsem',
     'days' => 'nap',
     '{participates} going' => '{participates} résztvevő',
+    'Load more events' => 'Újabb események betöltése',
 ];

@@ -21,13 +21,18 @@ use yii\helpers\ArrayHelper;
 class DefaultController extends Controller
 {
     /**
+     * Date threshold in days (if an event newer than this, it wont show by default)
+     */
+    const DATE_THRESHOLD = 60;
+
+    /**
      * {@inheritdoc}
      */
     public function behaviors()
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                     'attend' => ['POST'],
@@ -37,7 +42,7 @@ class DefaultController extends Controller
                 ],
             ],
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'actions' => ['create', 'update', 'delete'],
@@ -63,7 +68,6 @@ class DefaultController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => Event::find()
                 ->with('participates')
-                ->where(['<', 'start', new \yii\db\Expression('NOW() + INTERVAL 2 MONTH')])
                 ->orderBy('start DESC'),
             'pagination' => [
                 'defaultPageSize' => 50
@@ -78,7 +82,8 @@ class DefaultController extends Controller
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'closestEvent' => $closestEvent
+            'closestEvent' => $closestEvent,
+            'dateThreshold' => self::DATE_THRESHOLD,
         ]);
     }
 

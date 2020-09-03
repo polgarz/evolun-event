@@ -13,31 +13,33 @@ class Module extends \yii\base\Module
     public $controllerNamespace = 'evolun\event\controllers';
 
     /**
-     * Az esemény kategóriák egyes tulajdonságai (alapértelmezett kategóriák)
-     * A tömb kulcsa a kategória adatbázisban rögzített neve, a tömb elemei:
-     * - title: A kategória neve
-     * - icon: ez jelenik meg a felületen mindenhol a kategória neve mellett
-     * - color: az ikon szine
-     * - roles: szerepkörök, amikre lehet jelentkezni adott kategórián belül
-     *          (tömb, a kulcs az adatbázisban tárolt adat, az érték szintén tömb, elemei:
-     *          name: a szerep neve, limit: hányan jelentkezhetnek (0: végtelen))
-     * @var array
-     */
-    private $_defaultCategories;
-
-    /**
-     * A saját esemény kategóriák (@see defaultCategories)
+     * Custom event categories (for schema @see defaultCategories)
      * @var array
      */
     public $categories = [];
 
     /**
-     * Az esemény adatlapjának bal oldalán megjelenő dobozok (a fő doboz alatt)
+     * Widgets (below the main box on event page)
      * @var array
      */
     public $widgets = [
         \evolun\event\widgets\RelatedEventsWidget::class,
     ];
+
+    /**
+     * Default event categories
+     * The key of the array is the name of the category recorded in the database,
+     * the elements of the array are:
+     * - title: category title
+     * - icon: icon url (for example: /icons/hike.svg)
+     * - color: icon background color
+     * - roles: roles that can be applied for within a given category
+     *   array, key of the array is the name of the category recorded in the database,
+     *     - name: role name
+     *     - limit: maximum person who can apply (0: infinity))
+     * @var array
+     */
+    private $_defaultCategories;
 
     /**
      * {@inheritdoc}
@@ -67,7 +69,7 @@ class Module extends \yii\base\Module
     {
         if (!isset(Yii::$app->get('i18n')->translations['event'])) {
             Yii::$app->get('i18n')->translations['event*'] = [
-                'class' => \yii\i18n\PhpMessageSource::className(),
+                'class' => \yii\i18n\PhpMessageSource::class,
                 'basePath' => __DIR__ . '/messages',
                 'sourceLanguage' => 'en-US',
                 'fileMap' => [
