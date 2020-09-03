@@ -4,6 +4,7 @@ namespace evolun\event\modules;
 
 use Yii;
 use evolun\event\models\Event;
+use yii\web\NotFoundHttpException;
 
 /**
  * Esemeényekhez tartozó al modulok fő modulja

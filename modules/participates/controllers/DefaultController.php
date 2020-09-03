@@ -23,6 +23,8 @@ class DefaultController extends Controller
      */
     public function init() : void
     {
+        parent::init();
+
         $this->setEvent($this->module->getEvent());
     }
 
